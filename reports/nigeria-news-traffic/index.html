@@ -8,54 +8,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root{
-  --bg: #F6F4ED;
+  --bg: #F7F5FF;
   --surface: #FFFFFF;
-  --surface-2: #EFECE1;
-  --ink: #1B1F1C;
-  --ink-soft: #4B534C;
-  --muted: #7C8378;
-  --line: #DEDACB;
-  --accent: #0B6E4F;
-  --accent-soft: #E4EFE7;
-  --accent-ink: #06432F;
-  --warn: #B0521E;
-  --c-vanguard: #2E3A6B;
-  --c-businessday: #D9622C;
-  --c-punch: #1E8F5A;
-  --c-sahara: #D9A125;
+  --surface-2: #EFEBFF;
+  --ink: #1C1B2E;
+  --ink-soft: #4A4766;
+  --muted: #7C7A99;
+  --line: #E3DEFA;
+  --accent: #6D3BF2;
+  --accent-soft: #EDE6FF;
+  --accent-ink: #4A22B8;
+  --warn: #E8590C;
+  --c-vanguard: #3D5AF2;
+  --c-businessday: #FF6B6B;
+  --c-punch: #12B886;
+  --c-sahara: #F2A73B;
   --c-thisday: #1FA7B0;
-  --shadow: 0 1px 2px rgba(27,31,28,0.04), 0 8px 24px -12px rgba(27,31,28,0.12);
+  --grad: linear-gradient(120deg, #6D3BF2 0%, #B24BF2 45%, #FF6B6B 100%);
+  --shadow: 0 1px 2px rgba(66,42,141,0.06), 0 10px 28px -14px rgba(66,42,141,0.22);
 }
 
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg: #14170F;
-    --surface: #1B1F16;
-    --surface-2: #21261A;
-    --ink: #ECEAE0;
-    --ink-soft: #C2C6B8;
-    --muted: #8B917F;
-    --line: #333A28;
-    --accent: #4FBE8B;
-    --accent-soft: #223228;
-    --accent-ink: #A6E9C9;
-    --warn: #E0995E;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    --bg: #201F33;
+    --surface: #2A2946;
+    --surface-2: #33325A;
+    --ink: #F1EFFF;
+    --ink-soft: #C9C6E8;
+    --muted: #9C99C2;
+    --line: #423F6E;
+    --accent: #A78BFA;
+    --accent-soft: #3A3766;
+    --accent-ink: #D9CCFF;
+    --warn: #FFA05E;
+    --c-vanguard: #8CA0FF;
+    --c-businessday: #FF8787;
+    --c-punch: #3DD9A5;
+    --c-sahara: #FFC15E;
+    --c-thisday: #4FD3DB;
+    --grad: linear-gradient(120deg, #A78BFA 0%, #E084F7 45%, #FF8787 100%);
+    --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 28px -14px rgba(0,0,0,0.5);
   }
 }
 :root[data-theme="dark"]{
-  --bg: #14170F;
-  --surface: #1B1F16;
-  --surface-2: #21261A;
-  --ink: #ECEAE0;
-  --ink-soft: #C2C6B8;
-  --muted: #8B917F;
-  --line: #333A28;
-  --accent: #4FBE8B;
-  --accent-soft: #223228;
-  --accent-ink: #A6E9C9;
-  --warn: #E0995E;
-  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  --bg: #201F33;
+  --surface: #2A2946;
+  --surface-2: #33325A;
+  --ink: #F1EFFF;
+  --ink-soft: #C9C6E8;
+  --muted: #9C99C2;
+  --line: #423F6E;
+  --accent: #A78BFA;
+  --accent-soft: #3A3766;
+  --accent-ink: #D9CCFF;
+  --warn: #FFA05E;
+  --c-vanguard: #8CA0FF;
+  --c-businessday: #FF8787;
+  --c-punch: #3DD9A5;
+  --c-sahara: #FFC15E;
+  --c-thisday: #4FD3DB;
+  --grad: linear-gradient(120deg, #A78BFA 0%, #E084F7 45%, #FF8787 100%);
+  --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 28px -14px rgba(0,0,0,0.5);
 }
 
 *{box-sizing:border-box;}
@@ -68,24 +81,28 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-.wrap{max-width:1080px;margin:0 auto;padding:56px 32px 96px;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px 96px;}
 
 /* ---------- Header ---------- */
+.hero{
+  background:var(--grad);
+  padding:52px 32px 44px;
+  margin-bottom:40px;
+  border-radius:0 0 24px 24px;
+}
+.hero-inner{max-width:1080px;margin:0 auto;}
 header{
   display:flex;
   flex-direction:column;
   gap:14px;
-  padding-bottom:36px;
-  border-bottom:1px solid var(--line);
-  margin-bottom:40px;
 }
 .eyebrow{
   font-family:'IBM Plex Mono',monospace;
   font-size:12px;
   letter-spacing:0.12em;
   text-transform:uppercase;
-  color:var(--accent-ink);
-  background:var(--accent-soft);
+  color:#fff;
+  background:rgba(255,255,255,0.2);
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -101,10 +118,11 @@ h1{
   margin:0;
   text-wrap:balance;
   letter-spacing:-0.01em;
+  color:#fff;
 }
 .dek{
   font-size:16.5px;
-  color:var(--ink-soft);
+  color:rgba(255,255,255,0.9);
   max-width:62ch;
   margin:0;
 }
@@ -114,7 +132,7 @@ h1{
   gap:18px;
   font-family:'IBM Plex Mono',monospace;
   font-size:12.5px;
-  color:var(--muted);
+  color:rgba(255,255,255,0.85);
   margin-top:6px;
 }
 .meta-row span{display:inline-flex;align-items:center;gap:6px;}
@@ -125,11 +143,13 @@ h1{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:10px;
+  margin-top:36px;
   margin-bottom:44px;
 }
 .site-chip{
   background:var(--surface);
   border:1px solid var(--line);
+  border-top:3px solid var(--dot-color, var(--accent));
   border-radius:8px;
   padding:12px 14px;
   display:flex;
@@ -165,6 +185,18 @@ h2{
   font-size:23px;
   margin:0;
   letter-spacing:-0.01em;
+  position:relative;
+  padding-left:16px;
+}
+h2::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:4px;
+  bottom:4px;
+  width:5px;
+  border-radius:3px;
+  background:var(--grad);
 }
 .sec-note{
   font-size:13px;
@@ -248,10 +280,14 @@ td.site{
 .stat-card{
   background:var(--surface);
   border:1px solid var(--line);
+  border-top:3px solid var(--accent);
   border-radius:10px;
   padding:16px 16px 14px;
   box-shadow:var(--shadow);
 }
+.stat-card:nth-of-type(4n+2){border-top-color:var(--c-punch);}
+.stat-card:nth-of-type(4n+3){border-top-color:var(--c-sahara);}
+.stat-card:nth-of-type(4n+4){border-top-color:var(--c-businessday);}
 .stat-card .stat-label{
   font-family:'IBM Plex Mono',monospace;
   font-size:11px;
@@ -297,11 +333,19 @@ td.site{
   border:1px solid var(--line);
   border-radius:8px;
 }
+.takeaway{border-left:3px solid var(--accent);}
 .takeaway .n{
   font-family:'IBM Plex Mono',monospace;
-  font-size:12px;
-  color:var(--accent-ink);
+  font-size:11px;
+  color:#fff;
+  background:var(--grad);
   font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:50%;
 }
 .takeaway p{margin:0;font-size:14px;color:var(--ink-soft);}
 .takeaway strong{color:var(--ink);}
@@ -321,37 +365,41 @@ footer{
 
 @media (max-width:700px){
   .sites{grid-template-columns:repeat(2,1fr);}
-  .wrap{padding:40px 20px 72px;}
+  .wrap{padding:0 20px 72px;}
+  .hero{padding:40px 20px 32px;}
 }
 </style>
 <style>
-.back-link{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:18px;}
-.back-link:hover{color:var(--accent-ink);}
+.back-link{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:rgba(255,255,255,0.85);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:22px;}
+.back-link:hover{color:#fff;}
 </style>
 </head>
 <body>
-<div class="wrap" style="padding-bottom:0;">
-<a class="back-link" href="../../index.html">&larr; All reports</a>
+
+<div class="hero">
+  <div class="hero-inner">
+    <a class="back-link" href="../../index.html">&larr; All reports</a>
+    <header>
+      <span class="eyebrow">Similarweb Pro &middot; Website Performance</span>
+      <h1>Nigeria's Big Five News Sites, By The Numbers</h1>
+      <p class="dek">A side-by-side read of traffic, engagement, and channel mix for Vanguard, BusinessDay, Punch, SaharaReporters, and ThisDay, pulled from Similarweb Pro's website performance comparison.</p>
+      <div class="meta-row">
+        <span>Period: July 2026 (1 month)</span>
+        <span>Scope: Worldwide, all traffic</span>
+        <span>Source: pro.similarweb.com</span>
+      </div>
+    </header>
+  </div>
 </div>
+
 <div class="wrap">
 
-  <header>
-    <span class="eyebrow">Similarweb Pro &middot; Website Performance</span>
-    <h1>Nigeria's Big Five News Sites, By The Numbers</h1>
-    <p class="dek">A side-by-side read of traffic, engagement, and channel mix for Vanguard, BusinessDay, Punch, SaharaReporters, and ThisDay, pulled from Similarweb Pro's website performance comparison.</p>
-    <div class="meta-row">
-      <span>Period: July 2026 (1 month)</span>
-      <span>Scope: Worldwide, all traffic</span>
-      <span>Source: pro.similarweb.com</span>
-    </div>
-  </header>
-
   <div class="sites">
-    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</span><span class="role">Traffic volume leader</span></div>
-    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</span><span class="role">Smallest audience</span></div>
-    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</span><span class="role">Most visits, best engagement</span></div>
-    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</span><span class="role">Global rank leader</span></div>
-    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</span><span class="role">Deepest single-visit engagement</span></div>
+    <div class="site-chip" style="--dot-color:var(--c-vanguard);"><span class="name"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</span><span class="role">Traffic volume leader</span></div>
+    <div class="site-chip" style="--dot-color:var(--c-businessday);"><span class="name"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</span><span class="role">Smallest audience</span></div>
+    <div class="site-chip" style="--dot-color:var(--c-punch);"><span class="name"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</span><span class="role">Most visits, best engagement</span></div>
+    <div class="site-chip" style="--dot-color:var(--c-sahara);"><span class="name"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</span><span class="role">Global rank leader</span></div>
+    <div class="site-chip" style="--dot-color:var(--c-thisday);"><span class="name"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</span><span class="role">Deepest single-visit engagement</span></div>
   </div>
 
   <section>

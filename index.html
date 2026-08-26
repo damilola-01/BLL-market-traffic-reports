@@ -8,46 +8,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root{
-  --bg: #F6F4ED;
+  --bg: #F7F5FF;
   --surface: #FFFFFF;
-  --surface-2: #EFECE1;
-  --ink: #1B1F1C;
-  --ink-soft: #4B534C;
-  --muted: #7C8378;
-  --line: #DEDACB;
-  --accent: #0B6E4F;
-  --accent-soft: #E4EFE7;
-  --accent-ink: #06432F;
-  --shadow: 0 1px 2px rgba(27,31,28,0.04), 0 8px 24px -12px rgba(27,31,28,0.12);
+  --surface-2: #EFEBFF;
+  --ink: #1C1B2E;
+  --ink-soft: #4A4766;
+  --muted: #7C7A99;
+  --line: #E3DEFA;
+  --accent: #6D3BF2;
+  --accent-2: #FF6B6B;
+  --accent-3: #12B886;
+  --accent-4: #F2A73B;
+  --accent-soft: #EDE6FF;
+  --accent-ink: #4A22B8;
+  --grad: linear-gradient(120deg, #6D3BF2 0%, #B24BF2 45%, #FF6B6B 100%);
+  --shadow: 0 1px 2px rgba(66,42,141,0.06), 0 10px 28px -14px rgba(66,42,141,0.22);
 }
 
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg: #14170F;
-    --surface: #1B1F16;
-    --surface-2: #21261A;
-    --ink: #ECEAE0;
-    --ink-soft: #C2C6B8;
-    --muted: #8B917F;
-    --line: #333A28;
-    --accent: #4FBE8B;
-    --accent-soft: #223228;
-    --accent-ink: #A6E9C9;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    --bg: #201F33;
+    --surface: #2A2946;
+    --surface-2: #33325A;
+    --ink: #F1EFFF;
+    --ink-soft: #C9C6E8;
+    --muted: #9C99C2;
+    --line: #423F6E;
+    --accent: #A78BFA;
+    --accent-2: #FF8787;
+    --accent-3: #3DD9A5;
+    --accent-4: #FFC15E;
+    --accent-soft: #3A3766;
+    --accent-ink: #D9CCFF;
+    --grad: linear-gradient(120deg, #A78BFA 0%, #E084F7 45%, #FF8787 100%);
+    --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 28px -14px rgba(0,0,0,0.5);
   }
 }
 :root[data-theme="dark"]{
-  --bg: #14170F;
-  --surface: #1B1F16;
-  --surface-2: #21261A;
-  --ink: #ECEAE0;
-  --ink-soft: #C2C6B8;
-  --muted: #8B917F;
-  --line: #333A28;
-  --accent: #4FBE8B;
-  --accent-soft: #223228;
-  --accent-ink: #A6E9C9;
-  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  --bg: #201F33;
+  --surface: #2A2946;
+  --surface-2: #33325A;
+  --ink: #F1EFFF;
+  --ink-soft: #C9C6E8;
+  --muted: #9C99C2;
+  --line: #423F6E;
+  --accent: #A78BFA;
+  --accent-2: #FF8787;
+  --accent-3: #3DD9A5;
+  --accent-4: #FFC15E;
+  --accent-soft: #3A3766;
+  --accent-ink: #D9CCFF;
+  --grad: linear-gradient(120deg, #A78BFA 0%, #E084F7 45%, #FF8787 100%);
+  --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 28px -14px rgba(0,0,0,0.5);
 }
 
 *{box-sizing:border-box;}
@@ -59,23 +71,27 @@ body{
   line-height:1.55;
   -webkit-font-smoothing:antialiased;
 }
-.wrap{max-width:960px;margin:0 auto;padding:64px 32px 96px;}
+.wrap{max-width:960px;margin:0 auto;padding:0 32px 96px;}
 
+.hero{
+  background:var(--grad);
+  padding:64px 32px 56px;
+  margin-bottom:44px;
+  border-radius:0 0 28px 28px;
+}
+.hero-inner{max-width:960px;margin:0 auto;}
 header{
   display:flex;
   flex-direction:column;
   gap:14px;
-  padding-bottom:36px;
-  border-bottom:1px solid var(--line);
-  margin-bottom:44px;
 }
 .eyebrow{
   font-family:'IBM Plex Mono',monospace;
   font-size:12px;
   letter-spacing:0.12em;
   text-transform:uppercase;
-  color:var(--accent-ink);
-  background:var(--accent-soft);
+  color:#fff;
+  background:rgba(255,255,255,0.18);
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -86,17 +102,28 @@ header{
 h1{
   font-family:'Source Serif 4',Georgia,serif;
   font-weight:600;
-  font-size:clamp(30px,4vw,42px);
+  font-size:clamp(30px,4vw,44px);
   line-height:1.12;
   margin:0;
   text-wrap:balance;
   letter-spacing:-0.01em;
+  color:#fff;
 }
 .dek{
   font-size:16.5px;
-  color:var(--ink-soft);
+  color:rgba(255,255,255,0.88);
   max-width:62ch;
   margin:0;
+}
+
+.section-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:600;
+  margin:0 0 16px;
 }
 
 .reports{
@@ -105,8 +132,10 @@ h1{
 }
 .report-card{
   display:block;
+  position:relative;
   background:var(--surface);
   border:1px solid var(--line);
+  border-left:5px solid var(--accent-3);
   border-radius:12px;
   padding:22px 24px;
   box-shadow:var(--shadow);
@@ -116,16 +145,19 @@ h1{
 }
 .report-card:hover{
   transform:translateY(-2px);
-  box-shadow:0 4px 6px rgba(27,31,28,0.06), 0 14px 32px -14px rgba(27,31,28,0.18);
+  box-shadow:0 4px 10px rgba(66,42,141,0.1), 0 18px 36px -14px rgba(66,42,141,0.3);
 }
 .report-card .tag{
   font-family:'IBM Plex Mono',monospace;
   font-size:11px;
   letter-spacing:0.06em;
   text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:8px;
-  display:block;
+  color:#fff;
+  background:var(--accent-3);
+  padding:3px 9px;
+  border-radius:20px;
+  margin-bottom:10px;
+  display:inline-block;
 }
 .report-card h2{
   font-family:'Source Serif 4',Georgia,serif;
@@ -148,6 +180,7 @@ h1{
   gap:16px;
   flex-wrap:wrap;
 }
+.report-card .meta span::before{content:"● ";color:var(--accent-4);}
 
 footer{
   margin-top:60px;
@@ -159,18 +192,26 @@ footer{
 }
 
 @media (max-width:700px){
-  .wrap{padding:40px 20px 72px;}
+  .wrap{padding:0 20px 72px;}
+  .hero{padding:48px 20px 40px;}
 }
 </style>
 </head>
 <body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <header>
+      <span class="eyebrow">BuyLetLive &middot; Internal Reports</span>
+      <h1>Market & Traffic Reports</h1>
+      <p class="dek">A running collection of traffic, market, and audience research pulled together for BuyLetLive's marketing and growth decisions.</p>
+    </header>
+  </div>
+</div>
+
 <div class="wrap">
 
-  <header>
-    <span class="eyebrow">BuyLetLive &middot; Internal Reports</span>
-    <h1>Market & Traffic Reports</h1>
-    <p class="dek">A running collection of traffic, market, and audience research pulled together for BuyLetLive's marketing and growth decisions.</p>
-  </header>
+  <p class="section-label">Latest reports</p>
 
   <div class="reports">
     <a class="report-card" href="reports/nigeria-news-traffic/index.html">
