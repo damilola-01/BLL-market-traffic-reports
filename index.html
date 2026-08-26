@@ -8,13 +8,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root{
-  --bg: #F7F5FF;
+  --bg: #FFFFFF;
   --surface: #FFFFFF;
-  --surface-2: #EFEBFF;
+  --surface-2: #F7F6FC;
   --ink: #1C1B2E;
   --ink-soft: #4A4766;
   --muted: #7C7A99;
-  --line: #E3DEFA;
+  --line: #E7E4F5;
   --accent: #6D3BF2;
   --accent-2: #FF6B6B;
   --accent-3: #12B886;
@@ -189,6 +189,10 @@ footer{
   font-family:'IBM Plex Mono',monospace;
   font-size:11.5px;
   color:var(--muted);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
 }
 
 @media (max-width:700px){
@@ -202,9 +206,9 @@ footer{
 <div class="hero">
   <div class="hero-inner">
     <header>
-      <span class="eyebrow">BuyLetLive &middot; Internal Reports</span>
+      <span class="eyebrow">BuyLetLive &middot; PR &amp; Media Research</span>
       <h1>Market & Traffic Reports</h1>
-      <p class="dek">A running collection of traffic, market, and audience research pulled together for BuyLetLive's marketing and growth decisions.</p>
+      <p class="dek">Built for PR: mapping where Nigerians in the diaspora actually spend their time online, so BuyLetLive's press placements, partnerships, and campaigns land on the platforms that reach them.</p>
     </header>
   </div>
 </div>
@@ -226,7 +230,8 @@ footer{
   </div>
 
   <footer>
-    More reports will be added here over time.
+    <span>More reports will be added here over time.</span>
+    <span>Created by Damilola</span>
   </footer>
 
 </div>
