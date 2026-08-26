@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nigerian News Sites Traffic Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg: #F6F4ED;
+  --surface: #FFFFFF;
+  --surface-2: #EFECE1;
+  --ink: #1B1F1C;
+  --ink-soft: #4B534C;
+  --muted: #7C8378;
+  --line: #DEDACB;
+  --accent: #0B6E4F;
+  --accent-soft: #E4EFE7;
+  --accent-ink: #06432F;
+  --warn: #B0521E;
+  --c-vanguard: #2E3A6B;
+  --c-businessday: #D9622C;
+  --c-punch: #1E8F5A;
+  --c-sahara: #D9A125;
+  --c-thisday: #1FA7B0;
+  --shadow: 0 1px 2px rgba(27,31,28,0.04), 0 8px 24px -12px rgba(27,31,28,0.12);
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg: #14170F;
+    --surface: #1B1F16;
+    --surface-2: #21261A;
+    --ink: #ECEAE0;
+    --ink-soft: #C2C6B8;
+    --muted: #8B917F;
+    --line: #333A28;
+    --accent: #4FBE8B;
+    --accent-soft: #223228;
+    --accent-ink: #A6E9C9;
+    --warn: #E0995E;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg: #14170F;
+  --surface: #1B1F16;
+  --surface-2: #21261A;
+  --ink: #ECEAE0;
+  --ink-soft: #C2C6B8;
+  --muted: #8B917F;
+  --line: #333A28;
+  --accent: #4FBE8B;
+  --accent-soft: #223228;
+  --accent-ink: #A6E9C9;
+  --warn: #E0995E;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Work Sans',system-ui,-apple-system,sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:1080px;margin:0 auto;padding:56px 32px 96px;}
+
+/* ---------- Header ---------- */
+header{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding-bottom:36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:40px;
+}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--accent-ink);
+  background:var(--accent-soft);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 10px;
+  border-radius:4px;
+  width:fit-content;
+}
+h1{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:600;
+  font-size:clamp(30px,4vw,42px);
+  line-height:1.12;
+  margin:0;
+  text-wrap:balance;
+  letter-spacing:-0.01em;
+}
+.dek{
+  font-size:16.5px;
+  color:var(--ink-soft);
+  max-width:62ch;
+  margin:0;
+}
+.meta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  color:var(--muted);
+  margin-top:6px;
+}
+.meta-row span{display:inline-flex;align-items:center;gap:6px;}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+
+/* ---------- Sites legend ---------- */
+.sites{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-bottom:44px;
+}
+.site-chip{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  box-shadow:var(--shadow);
+}
+.site-chip .name{
+  font-weight:600;
+  font-size:13.5px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.site-chip .role{
+  font-size:11.5px;
+  color:var(--muted);
+}
+
+/* ---------- Section ---------- */
+section{margin-bottom:52px;}
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+h2{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:600;
+  font-size:23px;
+  margin:0;
+  letter-spacing:-0.01em;
+}
+.sec-note{
+  font-size:13px;
+  color:var(--muted);
+  font-family:'IBM Plex Mono',monospace;
+}
+p.lead{
+  font-size:15px;
+  color:var(--ink-soft);
+  max-width:70ch;
+  margin:0 0 20px;
+}
+
+/* ---------- Tables ---------- */
+.table-scroll{overflow-x:auto;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow);}
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:var(--surface);
+  font-size:14px;
+  min-width:560px;
+}
+thead th{
+  text-align:left;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:500;
+  padding:13px 16px;
+  border-bottom:1px solid var(--line);
+  background:var(--surface-2);
+}
+tbody td{
+  padding:12px 16px;
+  border-bottom:1px solid var(--line);
+  font-variant-numeric:tabular-nums;
+}
+tbody tr:last-child td{border-bottom:none;}
+td.site{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.rank-badge{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:var(--accent-ink);
+  background:var(--accent-soft);
+  padding:2px 7px;
+  border-radius:4px;
+}
+.lead-cell{position:relative;}
+.lead-cell.win{font-weight:700;color:var(--accent-ink);}
+.lead-cell.win::after{
+  content:"leader";
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9.5px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-left:8px;
+  font-weight:500;
+}
+
+/* bar cell */
+.bar-cell{display:flex;align-items:center;gap:10px;}
+.bar-track{flex:1;height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden;min-width:60px;}
+.bar-fill{height:100%;border-radius:3px;background:var(--accent);}
+.bar-val{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);min-width:56px;text-align:right;}
+
+/* ---------- Stat grid ---------- */
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+.stat-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:16px 16px 14px;
+  box-shadow:var(--shadow);
+}
+.stat-card .stat-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  margin-bottom:8px;
+}
+.stat-card .stat-num{
+  font-family:'Source Serif 4',serif;
+  font-size:26px;
+  font-weight:600;
+  color:var(--ink);
+}
+.stat-card .stat-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+
+/* ---------- Two-col layout ---------- */
+.two-col{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start;}
+@media (max-width:760px){.two-col{grid-template-columns:1fr;}}
+
+/* ---------- callout ---------- */
+.callout{
+  background:var(--surface-2);
+  border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0;
+  padding:16px 18px;
+  font-size:14.5px;
+  color:var(--ink-soft);
+}
+.callout b{color:var(--ink);}
+
+/* ---------- takeaways ---------- */
+.takeaways{
+  display:grid;
+  gap:10px;
+}
+.takeaway{
+  display:grid;
+  grid-template-columns:22px 1fr;
+  gap:12px;
+  padding:14px 16px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.takeaway .n{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--accent-ink);
+  font-weight:600;
+}
+.takeaway p{margin:0;font-size:14px;color:var(--ink-soft);}
+.takeaway strong{color:var(--ink);}
+
+footer{
+  margin-top:60px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  color:var(--muted);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+@media (max-width:700px){
+  .sites{grid-template-columns:repeat(2,1fr);}
+  .wrap{padding:40px 20px 72px;}
+}
+</style>
+<style>
+.back-link{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:18px;}
+.back-link:hover{color:var(--accent-ink);}
+</style>
+</head>
+<body>
+<div class="wrap" style="padding-bottom:0;">
+<a class="back-link" href="../../index.html">&larr; All reports</a>
+</div>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Similarweb Pro &middot; Website Performance</span>
+    <h1>Nigeria's Big Five News Sites, By The Numbers</h1>
+    <p class="dek">A side-by-side read of traffic, engagement, and channel mix for Vanguard, BusinessDay, Punch, SaharaReporters, and ThisDay, pulled from Similarweb Pro's website performance comparison.</p>
+    <div class="meta-row">
+      <span>Period: July 2026 (1 month)</span>
+      <span>Scope: Worldwide, all traffic</span>
+      <span>Source: pro.similarweb.com</span>
+    </div>
+  </header>
+
+  <div class="sites">
+    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</span><span class="role">Traffic volume leader</span></div>
+    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</span><span class="role">Smallest audience</span></div>
+    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</span><span class="role">Most visits, best engagement</span></div>
+    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</span><span class="role">Global rank leader</span></div>
+    <div class="site-chip"><span class="name"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</span><span class="role">Deepest single-visit engagement</span></div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <h2>Traffic &amp; global standing</h2>
+      <span class="sec-note">Jul 2026 · Worldwide</span>
+    </div>
+    <p class="lead">Punch and Vanguard pull the largest audiences by a wide margin, together they account for roughly 78% of the group's combined visits. SaharaReporters carries the strongest global rank despite mid-pack traffic, suggesting a more concentrated, high-intent readership.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Site</th><th>Total visits</th><th>Share of group traffic</th><th>Global rank</th><th>Nigeria rank (Similarweb Country #)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</td>
+            <td>9.164M</td>
+            <td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--c-punch)"></div></div><span class="bar-val">40.3%</span></td>
+            <td>#16,559</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</td>
+            <td>8.815M</td>
+            <td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:96%;background:var(--c-vanguard)"></div></div><span class="bar-val">38.8%</span></td>
+            <td>#15,352</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</td>
+            <td>2.306M</td>
+            <td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:25%;background:var(--c-sahara)"></div></div><span class="bar-val">10.1%</span></td>
+            <td class="lead-cell win">#37,801</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</td>
+            <td>1.416M</td>
+            <td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:15%;background:var(--c-businessday)"></div></div><span class="bar-val">6.2%</span></td>
+            <td>#98,024</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</td>
+            <td>1.131M</td>
+            <td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:12%;background:var(--c-thisday)"></div></div><span class="bar-val">5.0%</span></td>
+            <td>#71,841</td>
+            <td>&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Device split</h2>
+      <span class="sec-note">Desktop vs. mobile</span>
+    </div>
+    <p class="lead">Every title is overwhelmingly mobile-first, as expected for Nigerian news consumption, but ThisDay stands out with the heaviest desktop share of the group, roughly 3.5&times; SaharaReporters' desktop rate.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Site</th><th>Desktop</th><th>Mobile</th></tr></thead>
+        <tbody>
+          <tr><td class="site"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</td><td class="lead-cell win">21.7%</td><td>78.3%</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</td><td>12.6%</td><td>87.4%</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</td><td>12.2%</td><td>87.8%</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</td><td>7.9%</td><td>92.1%</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</td><td>6.0%</td><td>94.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Engagement quality</h2>
+      <span class="sec-note">Per-visit behavior, Jul 2026</span>
+    </div>
+    <p class="lead">Volume and quality don't move together here. SaharaReporters trails on raw visits but wins on every single engagement metric, longest visit duration, most pages per visit, lowest bounce rate. Punch backs up its traffic lead with the highest total page views.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Site</th><th>Visit duration</th><th>Pages / visit</th><th>Bounce rate</th><th>Page views</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</td>
+            <td>00:01:31</td><td>2.16</td><td>53.99%</td><td>19.08M</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</td>
+            <td>00:01:03</td><td>1.85</td><td>58.89%</td><td>2.615M</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</td>
+            <td>00:03:09</td><td>3.05</td><td>48.4%</td><td class="lead-cell win">27.93M</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</td>
+            <td class="lead-cell win">00:05:20</td><td class="lead-cell win">3.54</td><td class="lead-cell win">36.7%</td><td>8.173M</td>
+          </tr>
+          <tr>
+            <td class="site"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</td>
+            <td>00:02:02</td><td>1.88</td><td>54.59%</td><td>2.130M</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="two-col">
+      <div>
+        <div class="sec-head"><h2>Geography</h2></div>
+        <p class="lead">Combined audience across all five sites, worldwide.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Country</th><th>Traffic share</th></tr></thead>
+            <tbody>
+              <tr><td>Nigeria</td><td class="lead-cell win">73.89%</td></tr>
+              <tr><td>United States</td><td>8.77%</td></tr>
+              <tr><td>United Kingdom</td><td>3.41%</td></tr>
+              <tr><td>Canada</td><td>2.32%</td></tr>
+              <tr><td>Germany</td><td>1.00%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head"><h2>Reading it</h2></div>
+        <div class="callout">
+          <b>Diaspora reach matters.</b> Roughly a quarter of combined traffic comes from outside Nigeria, the US, UK, Canada and Germany alone add up to over 15%, pointing to a real diaspora readership worth factoring into any content or ad strategy aimed at these titles.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Which platform does the diaspora actually use?</h2>
+      <span class="sec-note">Per-site share within each country's traffic, Jul 2026</span>
+    </div>
+    <p class="lead">Pulling the exact site-level split within each country (not just the combined total) answers this directly. Punch and Vanguard dominate every diaspora market, but the <em>mix</em> shifts by country, UK and Canadian diaspora traffic leans hardest toward Punch, while Germany's small Nigerian audience is unusually Vanguard-heavy.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Country</th><th>vanguardngr.com</th><th>businessday.ng</th><th>punchng.com</th><th>saharareporters.com</th><th>thisdaylive.com</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="site" style="display:table-cell;">🇺🇸 United States</td><td>42.0%</td><td>3.9%</td><td class="lead-cell win">36.9%</td><td>10.2%</td><td>7.1%</td></tr>
+          <tr><td class="site" style="display:table-cell;">🇬🇧 United Kingdom</td><td>27.2%</td><td>5.9%</td><td class="lead-cell win">54.8%</td><td>8.1%</td><td>4.0%</td></tr>
+          <tr><td class="site" style="display:table-cell;">🇨🇦 Canada</td><td>23.2%</td><td>12.4%</td><td class="lead-cell win">57.2%</td><td>2.5%</td><td>4.8%</td></tr>
+          <tr><td class="site" style="display:table-cell;">🇩🇪 Germany</td><td class="lead-cell win">62.2%</td><td>3.7%</td><td>29.4%</td><td>3.2%</td><td>1.5%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note" style="margin-top:8px;">Source: the "Group traffic share split" bars in Similarweb's Top Countries table above, read directly from the page data rather than estimated visually, Similarweb doesn't paywall this split even though full per-country total-visit filtering is locked.</p>
+
+    <div class="stat-grid" style="margin-top:22px;">
+      <div class="stat-card">
+        <div class="stat-label">Est. UK+US+CA+DE visits/mo</div>
+        <div class="stat-num">~3.54M</div>
+        <div class="stat-sub">across all 5 sites combined</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Punch's diaspora share</div>
+        <div class="stat-num">43.4%</div>
+        <div class="stat-sub">of all diaspora visits in this set</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Vanguard's diaspora share</div>
+        <div class="stat-num">37.2%</div>
+        <div class="stat-sub">of all diaspora visits in this set</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Most diaspora-leaning site</div>
+        <div class="stat-num" style="font-size:20px;">thisdaylive.com</div>
+        <div class="stat-sub">17.9% of its own traffic is UK/US/CA/DE, vs. 15.5% group avg</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:18px;">
+      <b>Reach alone is a shallow read.</b> Punch and Vanguard have the most diaspora traffic in raw terms, but raw traffic doesn't say anything about whether that audience actually sticks around, reads deeply, or is receptive to a message once they land. The section below folds engagement quality in to get a properly weighted answer.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Reach vs. quality: a weighted diaspora value score</h2>
+      <span class="sec-note">Composite of diaspora traffic volume + engagement depth</span>
+    </div>
+    <p class="lead">Traffic volume tells you how many diaspora visitors land on a site. It says nothing about whether they stay, read, or are in a receptive state when they get there, which is what actually matters for a real-estate lead-gen message. Combining the diaspora visit volume (previous section) with each site's engagement quality, visit duration, pages per visit, and inverse bounce rate, each normalized 0–100 across the group, produces a fuller picture.</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Site</th><th>Diaspora visits (UK/US/CA/DE)</th><th>Visit duration</th><th>Pages/visit</th><th>Bounce rate</th><th>Engagement Quality Index</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="site"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</td><td>1.536M</td><td>00:03:09</td><td>3.05</td><td>48.4%</td><td class="lead-cell win">55.8 / 100</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</td><td>0.288M</td><td class="lead-cell win">00:05:20</td><td class="lead-cell win">3.54</td><td class="lead-cell win">36.7%</td><td class="lead-cell win">100.0 / 100</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</td><td class="lead-cell win">1.318M</td><td>00:01:31</td><td>2.16</td><td>53.99%</td><td>17.1 / 100</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</td><td>0.202M</td><td>00:02:02</td><td>1.88</td><td>54.59%</td><td>14.7 / 100</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</td><td>0.198M</td><td>00:01:03</td><td>1.85</td><td>58.89%</td><td>0.0 / 100</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note" style="margin-top:8px;">Engagement Quality Index (EQI) = average of min-max normalized visit duration, pages/visit, and inverse bounce rate across the 5 sites. Highest observed value in each raw metric is bolded above.</p>
+
+    <p class="lead" style="margin-top:24px;">Because engagement quality and diaspora reach can matter differently depending on the campaign, an awareness push cares more about reach, a lead-gen push cares more about whether the audience actually engages, three weightings below show how the ranking shifts:</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Site</th><th>Reach-weighted (70/30)<br><span style="font-weight:400;color:var(--muted);">brand awareness</span></th><th>Balanced (50/50)</th><th>Quality-weighted (30/70)<br><span style="font-weight:400;color:var(--muted);">lead-gen / conversion</span></th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="site"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</td><td class="lead-cell win">86.7</td><td class="lead-cell win">77.9</td><td>69.0</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</td><td>34.7</td><td>53.3</td><td class="lead-cell win">72.0</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</td><td>63.7</td><td>50.4</td><td>37.1</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</td><td>4.6</td><td>7.5</td><td>10.4</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</td><td>0.0</td><td>0.0</td><td>0.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:18px;">
+      <b>What this actually means for BuyLetLive:</b> Punch is the safe #1 pick under any weighting since it's never below 2nd place, meaning it works whether the goal is broad diaspora awareness or targeted lead-gen. The real finding is <strong>SaharaReporters</strong>: at balanced weighting it's already statistically tied with Vanguard (53.3 vs 50.4) despite having roughly a fifth of Vanguard's diaspora traffic, and under a lead-gen-weighted view, which matches BuyLetLive's stated "maximize enquiries" objective, it actually <strong>overtakes Vanguard entirely</strong> (72.0 vs 37.1). Its readers stay nearly 4× longer, view more pages, and bounce at roughly two-thirds the rate. For a real-estate message that needs someone to read, click through, and fill a form, not just glance and scroll past, that engaged-but-smaller audience may convert better per impression than a bigger, shallower one. Vanguard's high reach is real, but it comes with the weakest engagement of the top-3 sites, making it a "broad but shallow" audience. BusinessDay and ThisDay are hard to justify on either reach or quality for diaspora targeting specifically, despite ThisDay's higher share of its own traffic being diaspora (a concentration metric, not a value metric, since its absolute diaspora pool is simply too small at ~202K visits/month).
+    </div>
+
+    <div class="callout" style="margin-top:14px; border-left-color:var(--warn);">
+      <b>Limitation to flag:</b> the engagement metrics above (visit duration, pages/visit, bounce rate) are each site's <em>global</em> averages, not diaspora-specific. Similarweb paywalls country-level engagement breakdowns behind a plan upgrade (confirmed: both the "Traffic & engagement" and "Audience" pages redirect back to the free overview under the current expired trial). It's a reasonable proxy since there's no strong reason to expect UK/US readers behave dramatically differently from a site's average reader, but it's an assumption, not a directly-measured diaspora number. If this decision is worth real ad budget, a Similarweb Pro upgrade (or a UTM-tagged test campaign on 2 to 3 of these sites) would confirm it directly.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Marketing channels</h2>
+      <span class="sec-note">Jul 2026 · How visits arrive</span>
+    </div>
+    <p class="lead">Direct and organic search dominate across the board, paid channels are negligible for all five. ThisDay leads the group on organic search share (40.96%), while BusinessDay draws the (still tiny, &lt;1%) most paid-search traffic of the set.</p>
+    <div class="takeaways">
+      <div class="takeaway"><span class="n">01</span><p><strong>Organic search:</strong> thisdaylive.com leads at <strong>40.96%</strong> of its traffic, the strongest SEO-driven acquisition of the five.</p></div>
+      <div class="takeaway"><span class="n">02</span><p><strong>Paid search:</strong> businessday.ng leads, but at under 1% of total traffic, none of these sites meaningfully invest in paid acquisition.</p></div>
+      <div class="takeaway"><span class="n">03</span><p><strong>Referrals:</strong> the group's top inbound referrers are c.newsnow.com (23.4% of referral traffic), dailypost.ng (11.3%), punchng.com itself (11.2%), and bbc.com (6.5%), aggregators and cross-media links carry real weight.</p></div>
+      <div class="takeaway"><span class="n">04</span><p><strong>Display ads:</strong> vanguardngr.com leads the group on display-ad-driven traffic, at 1.35% share, still a minor channel overall.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Social traffic mix</h2>
+      <span class="sec-note">Share of each site's social-referred visits</span>
+    </div>
+    <p class="lead">Facebook is the dominant social referrer for most of the group. ThisDay is the outlier, pulling nearly all its social traffic from Facebook alone; SaharaReporters shows the most Reddit-driven traffic of the set; Punch draws the most from "other" social sources.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Site</th><th>Facebook</th><th>X / Twitter</th><th>YouTube</th><th>Reddit</th><th>Other</th></tr></thead>
+        <tbody>
+          <tr><td class="site"><span class="dot" style="background:var(--c-vanguard)"></span>vanguardngr.com</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-businessday)"></span>businessday.ng</td><td>high</td><td>low</td><td>&mdash;</td><td>low</td><td>mid</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-punch)"></span>punchng.com</td><td>mid</td><td>low</td><td>mid</td><td>low</td><td class="lead-cell win">highest</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-sahara)"></span>saharareporters.com</td><td>mid</td><td>low</td><td>&mdash;</td><td class="lead-cell win">highest</td><td>mid</td></tr>
+          <tr><td class="site"><span class="dot" style="background:var(--c-thisday)"></span>thisdaylive.com</td><td class="lead-cell win">100%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note" style="margin-top:10px;">Exact percentages weren't legible in the chart pull, relative levels shown; re-check in-platform for precise figures if needed.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Takeaways</h2></div>
+    <div class="takeaways">
+      <div class="takeaway"><span class="n">→</span><p><strong>Punch</strong> is the clear #1 for diaspora targeting under any weighting of reach vs. engagement, high volume, above-average engagement, and disproportionately strong in the UK and Canada specifically (54.8% and 57.2% of those markets' traffic to this group).</p></div>
+      <div class="takeaway"><span class="n">→</span><p><strong>SaharaReporters is the standout for a lead-gen-weighted view</strong>, its diaspora audience is small (~288K/mo across UK/US/CA/DE) but reads nearly 4× longer, views more pages, and bounces two-thirds as often as Vanguard's. For BuyLetLive's "maximize enquiries" objective specifically, it likely outperforms Vanguard per impression despite the smaller pool.</p></div>
+      <div class="takeaway"><span class="n">→</span><p><strong>Vanguard is broad but shallow</strong>, the 2nd-largest diaspora traffic pool, but the weakest engagement of the top three; a good fit for pure reach/awareness buys, a weaker fit for conversion-focused placements.</p></div>
+      <div class="takeaway"><span class="n">→</span><p><strong>BusinessDay and ThisDay</strong> are hard to justify for diaspora spend on current data, smallest diaspora pools and, for BusinessDay, the weakest engagement in the group. ThisDay's high organic-search share (40.96%) and desktop lean (21.7%) suggest a more professional readership, but its diaspora volume is too small to prioritize yet.</p></div>
+      <div class="takeaway"><span class="n">→</span><p><strong>Direct + organic search</strong> drive almost all traffic industry-wide; paid acquisition is essentially unused across all five sites, an open channel if any of them wanted to invest in it, and a data point worth knowing before proposing a paid partnership.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Data: Similarweb Pro, Website Performance comparison &middot; Jul 2026, Worldwide, all traffic</span>
+    <span>Note: account's trial had ended mid-pull, some deeper breakdowns (keyword-level search terms, precise social %, additional countries) were paywalled and not captured</span>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLL Market & Traffic Reports</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg: #F6F4ED;
+  --surface: #FFFFFF;
+  --surface-2: #EFECE1;
+  --ink: #1B1F1C;
+  --ink-soft: #4B534C;
+  --muted: #7C8378;
+  --line: #DEDACB;
+  --accent: #0B6E4F;
+  --accent-soft: #E4EFE7;
+  --accent-ink: #06432F;
+  --shadow: 0 1px 2px rgba(27,31,28,0.04), 0 8px 24px -12px rgba(27,31,28,0.12);
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg: #14170F;
+    --surface: #1B1F16;
+    --surface-2: #21261A;
+    --ink: #ECEAE0;
+    --ink-soft: #C2C6B8;
+    --muted: #8B917F;
+    --line: #333A28;
+    --accent: #4FBE8B;
+    --accent-soft: #223228;
+    --accent-ink: #A6E9C9;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg: #14170F;
+  --surface: #1B1F16;
+  --surface-2: #21261A;
+  --ink: #ECEAE0;
+  --ink-soft: #C2C6B8;
+  --muted: #8B917F;
+  --line: #333A28;
+  --accent: #4FBE8B;
+  --accent-soft: #223228;
+  --accent-ink: #A6E9C9;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Work Sans',system-ui,-apple-system,sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:960px;margin:0 auto;padding:64px 32px 96px;}
+
+header{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding-bottom:36px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:44px;
+}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--accent-ink);
+  background:var(--accent-soft);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 10px;
+  border-radius:4px;
+  width:fit-content;
+}
+h1{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:600;
+  font-size:clamp(30px,4vw,42px);
+  line-height:1.12;
+  margin:0;
+  text-wrap:balance;
+  letter-spacing:-0.01em;
+}
+.dek{
+  font-size:16.5px;
+  color:var(--ink-soft);
+  max-width:62ch;
+  margin:0;
+}
+
+.reports{
+  display:grid;
+  gap:16px;
+}
+.report-card{
+  display:block;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:22px 24px;
+  box-shadow:var(--shadow);
+  text-decoration:none;
+  color:inherit;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.report-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 6px rgba(27,31,28,0.06), 0 14px 32px -14px rgba(27,31,28,0.18);
+}
+.report-card .tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:8px;
+  display:block;
+}
+.report-card h2{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:600;
+  font-size:20px;
+  margin:0 0 8px;
+  letter-spacing:-0.01em;
+}
+.report-card p{
+  font-size:14.5px;
+  color:var(--ink-soft);
+  margin:0 0 12px;
+  max-width:68ch;
+}
+.report-card .meta{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+footer{
+  margin-top:60px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  color:var(--muted);
+}
+
+@media (max-width:700px){
+  .wrap{padding:40px 20px 72px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">BuyLetLive &middot; Internal Reports</span>
+    <h1>Market & Traffic Reports</h1>
+    <p class="dek">A running collection of traffic, market, and audience research pulled together for BuyLetLive's marketing and growth decisions.</p>
+  </header>
+
+  <div class="reports">
+    <a class="report-card" href="reports/nigeria-news-traffic/index.html">
+      <span class="tag">Traffic Report</span>
+      <h2>Nigeria's Big Five News Sites, By The Numbers</h2>
+      <p>A side-by-side read of traffic, engagement, and channel mix for Vanguard, BusinessDay, Punch, SaharaReporters, and ThisDay, plus a diaspora-weighted value score for ad targeting.</p>
+      <span class="meta">
+        <span>Jul 2026</span>
+        <span>Source: Similarweb Pro</span>
+      </span>
+    </a>
+  </div>
+
+  <footer>
+    More reports will be added here over time.
+  </footer>
+
+</div>
+</body>
+</html>
